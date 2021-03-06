@@ -17,7 +17,7 @@ h1 {
 }
 
 h2 {
-    color: #00ab2c;
+    color: $black;
     font-size: 2.250rem;
     position: relative;
     width: 100%;
@@ -30,7 +30,7 @@ h2 {
         content: "";
         height: 4px;
         width: 100%;
-        background: #00ab2c;
+        background: $black;
         position: absolute;
         bottom: -16px;
         left: 0;
@@ -110,18 +110,18 @@ h5 {
 
     &.verde {
         i {
-            color: $cardVerde;
+            color: $black;
         }
 
         .numero {
-            color: $cardVerde;
+            color: $black;
             padding-top: 15px;
             padding-bottom: 15px;
             font-weight: 700
         }
 
         .texto-card {
-            color: $cardVerde;
+            color: $black;
         }
 
         .icone-titulo {
@@ -211,7 +211,8 @@ h5 {
         width: 100%;
         z-index: 100 !important;
         height: 100px;
-        background-color: $white;
+        background: $white;
+        background: linear-gradient(12deg, $white 50%, $black 90%);
         padding: 0 15px;
 
         .topbar-left {
@@ -282,6 +283,8 @@ h5 {
         height: 100%;
         border: 1px solid $gray;
         box-shadow: none;
+        
+        
 
         .mec-menu-wrapper {
 
@@ -332,7 +335,7 @@ h5 {
 
                 &.active-item {
                     a {
-                        color: #00ab2c;
+                        color: #020a04;
                     }
                 }
 
@@ -359,7 +362,7 @@ h5 {
 
                     &:hover {
                         text-decoration: none;
-                        color: #00ab2c;
+                        color: #020a04;
                         cursor: pointer;
                     }
                 }
@@ -387,8 +390,8 @@ h5 {
         bottom: 0;
         right: 0;
         z-index: 99;
-        background: $green;
-        background: linear-gradient(122deg, $green 0%, $gradientColor 100%);
+        background: $black;
+        background: linear-gradient(12deg, $black 30%, $gradientColor 100%);
         padding: 2em 2em 1.2em;
         color: $white;
 
@@ -531,7 +534,7 @@ body .ui-inputtext {
 }
 
 input:focus, p-inputMask:focus, .ui-inputtext:focus, body .ui-inputtext:focus {
-    border: 2px solid #007bff;
+    border: 2px solid $green;
 }
 
 body .ui-widget-content {
@@ -591,7 +594,7 @@ p-paginator p-dropdown {
 .ui-table .ui-paginator-bottom {
     border-left: 0 none;
     border-right: 0 none;
-    border-bottom: 1px solid #cacaca
+    border-bottom: 1px solid #030303
 }
 
 body .ui-paginator  {
@@ -600,13 +603,13 @@ body .ui-paginator  {
 
     & .ui-paginator-first, .ui-paginator-prev, .ui-paginator-next, .ui-paginator-last,
     .ui-paginator-current, .ui-paginator-right-content, .ui-dropdown .ui-dropdown-trigger .pi  {
-        color: #333333;
+        color: #0f0c0c;
         font-size: 15px;
         font-weight: 300;
     }
 
     & .ui-paginator-pages a.ui-state-active {
-        background-color: $cardVerde;
+        background-color: $black;
         color: #fff;
     }
 
@@ -738,8 +741,8 @@ button.button-diligenciar {
 }
 
 button.button-success {
-    background-color: #17882C !important;
-    border: 2px solid #17882C !important;
+    background-color: $black !important;
+    border: 2px solid $black !important;
 }
 
 button.button-success:hover {
@@ -749,7 +752,7 @@ button.button-success:hover {
 
 button.button-cancelar {
     background: none !important;
-    color: #555555;
+    color: #e60000;
     border: 2px solid #555555;
 }
 
