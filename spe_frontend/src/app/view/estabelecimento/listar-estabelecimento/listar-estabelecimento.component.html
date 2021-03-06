@@ -1,0 +1,96 @@
+<h2 class="titulo">
+    Estabelecimentos
+</h2>
+<div class="card">
+    <div class="p-fluid">
+        <p-toast key="tl" position="top-left"></p-toast>
+
+        <form #form="ngForm" (ngSubmit)="listar()">
+
+            <div class="p-grid p-jc-between">
+                <div class="p-col-10 p-md-6 p-sm-10">
+                    <div class="box">
+                        <strong>Nome: </strong>
+                        <span class="material-icons info-icon" pTooltip="Insira o Nome"
+                            tooltipPosition="top">info</span>
+                    </div>
+                    <span class="md-inputfield p-text-center">
+                        <input id="nome--estabelecimento" name="nome--estabelecimento" [(ngModel)]="estabelecimento.nome"
+                             class="width-100p" placeholder="Insira o Texto">
+                    </span>
+                </div>
+            </div>
+
+            <div class="botoesPesquisa">
+                <div class="p-mr-2">
+                    <button class="ui-button-rounded-50 ui-button-success button-success button-responsive"
+                        label="Pesquisar" pButton type="submit" (click)="liberaCarregamento()"></button>
+                </div>
+                <div>
+                    <button (click)="limpar()"
+                        class="ui-button-rounded-50 ui-button-secondary button-cancelar button-responsive"
+                        label="Limpar" pButton type="button" (click)="liberaCarregamento()"></button>
+                </div>
+            </div>
+
+            <div class="botaoIncluir">
+                <div class="box">
+                    <app-card-adicionar label="Incluir Novo" (click)="cadastrar()"></app-card-adicionar>
+                </div>
+            </div>
+
+            <div class="p-grid">
+                <div class="p-col-12 p-sm-12">
+                    <p-table #tabela (onLazyLoad)="listar()" (onPage)="liberaCarregamento()"
+                        [currentPageReportTemplate]="'Página {currentPage} de {totalPages}'" [lazy]="true"
+                        [pageLinks]="3" [paginator]="true" [autoLayout]="true" [resizableColumns]="true"
+                        [rowsPerPageOptions]="[10,25,50]" [rows]="10" [showCurrentPageReport]="true" [sortOrder]="1"
+                        [totalRecords]="estabelecimentos.totalElements" [value]="estabelecimentos.content">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th *ngFor="let col of colunas" [pSortableColumn]="col.field"
+                                (click)="liberaCarregamento()">
+                                    {{col.header}}
+                                    <p-sortIcon [field]="col.field" ariaLabel="Ative para ordenar"
+                                        ariaLabelAsc="Ative para listar em ordem crescente"
+                                        ariaLabelDesc="Ative para listar em ordem decrescente"></p-sortIcon>
+                                </th>
+                                <th></th>
+                            </tr>
+                        </ng-template>
+
+                        <ng-template let-item pTemplate="body">
+                            <tr>
+                                <td class="text-align-center">
+                                    {{item.nome}}
+                                </td>
+                                <td class="text-align-center">
+                                    {{item.endereco}}
+                                </td>
+                                <td class="text-align-center">
+                                    {{item.telefone}}
+                                </td>
+                                <td class="text-align-center">
+                                    <span class="cursor-pointer margin-right-10p p-mr-1">
+                                        <i (click)="editar(item.id)" class="pi pi-pencil"></i>
+                                    </span>
+                                    <span class="cursor-pointer">
+                                        <i (click)="excluir(item.id)" class="pi pi-trash"></i>
+                                    </span>
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template let-columns pTemplate="emptymessage">
+                            <tr>
+                                <td [attr.colspan]="6">
+                                    Nenhum registro encontrado
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<p-confirmDialog header="Excluir" [draggable]="false" icon="pi pi-exclamation-triangle"></p-confirmDialog>

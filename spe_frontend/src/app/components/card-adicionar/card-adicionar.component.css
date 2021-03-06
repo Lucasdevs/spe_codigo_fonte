@@ -1,0 +1,27 @@
+p-card a {
+  font-size: 1rem;
+}
+
+p-card a i {
+  font-size: 1.5em;
+  margin-bottom: .2em;
+}
+
+p-card:hover .texto-card {
+  text-decoration: underline;
+}
+
+p-card .custom {
+  height: 100% !important;
+  position: relative;
+  margin-top: -10px;
+}
+
+p-card .espacamento-interno {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: 0 -50% 0 0;
+  transform: translate(-50%, -50%);
+}
+

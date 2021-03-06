@@ -1,0 +1,121 @@
+<h2 class="titulo">
+    {{titulo}}
+</h2>
+<div class="card">
+    <div class="p-fluid">
+
+        <p-toast key="tl" position="top-left"></p-toast>
+
+        <form #form="ngForm" (ngSubmit)="salvar(form)">
+            <div class="p-grid">
+                <div class="p-col-12 p-md-4 p-sm-12">
+                    <div class="box">
+                        <strong>Nome: </strong>
+                        <span class="material-icons info-icon" pTooltip="Digite o Nome"
+                            tooltipPosition="top">info</span>
+                        <label>
+                            <span class="color-red">*</span>
+                        </label>
+                    </div>
+                    <span class="md-inputfield">
+                        <input #nome="ngModel" [(ngModel)]="profissional.nome"
+                            [ngClass]="{'ng-dirty ng-invalid ng-touched': !nome.valid && (!nome.pristine || nome.touched || form.submitted)}"
+                            id="nome-profissional" maxlength="80" name="nome-profissional" pInputText
+                            placeholder="Insira um texto" required type="text" />
+                        <div *ngIf="!nome.valid && (!nome.pristine || nome.touched || form.submitted)"
+                            class="ui-message ui-messages-error">O campo 'Nome' é de preenchimento obrigatório</div>
+
+                    </span>
+                </div>
+            </div>
+            <div class="p-grid">
+                <div class="p-col-12 p-md-4 p-sm-12">
+                    <div class="box">
+                        <strong>Endereço: </strong>
+                        <span class="material-icons info-icon" pTooltip="Digite o Endereço"
+                            tooltipPosition="top">info</span>
+                        <label>
+                            <span class="color-red">*</span>
+                        </label>
+                    </div>
+                    <span class="md-inputfield">
+                        <input #endereco="ngModel" [(ngModel)]="profissional.endereco"
+                            [ngClass]="{'ng-dirty ng-invalid ng-touched': !endereco.valid && (!endereco.pristine || endereco.touched || form.submitted)}"
+                            id="endereco-profissional" maxlength="80" name="endereco-profissional" pInputText
+                            placeholder="Insira um texto" required type="text" />
+                        <div *ngIf="!endereco.valid && (!endereco.pristine || endereco.touched || form.submitted)"
+                        class="ui-message ui-messages-error">O campo 'Endereço' é de preenchimento obrigatório</div>
+                    </span>
+                </div>
+            </div>
+            <div class="p-grid">
+                <div class="p-col-12 p-md-2 p-sm-12">
+                    <div class="box">
+                        <strong>Celular: </strong>
+                        <span class="material-icons info-icon" pTooltip="Digite o Celular"
+                            tooltipPosition="top">info</span>
+                        <label>
+                            <span class="color-red">*</span>
+                        </label>
+                    </div>
+                    <span class="md-inputfield">
+                        <p-inputMask #celular="ngModel" [(ngModel)]="profissional.celular"
+                            [ngClass]="{'ng-dirty ng-invalid ng-touched': !celular.valid && (!celular.pristine || celular.touched || form.submitted)}"
+                            id="celular-profissional" mask="+99 (99) 99999-9999" name="celular-profissional"
+                            placeholder="+xx (xx) xxxxx-xxxx" required unmask="true"></p-inputMask>
+                        <div *ngIf="!celular.valid && (!celular.pristine || celular.touched || form.submitted)"
+                            class="ui-message ui-messages-error">O campo 'Celular' é de preenchimento obrigatório</div>
+
+                    </span>
+                </div>
+                
+                <div class="p-col-12 p-md-2 p-sm-12 ">
+                    <div class="box">
+                        <strong>Telefone: </strong>
+                        <span class="material-icons info-icon" pTooltip="Digite o Telefone Residencial"
+                            tooltipPosition="top">info</span>
+                    </div>
+                    <span class="md-inputfield">
+                        <p-inputMask #telefone="ngModel" [(ngModel)]="profissional.telefone" 
+                            [ngClass]="{'ng-dirty ng-invalid ng-touched': !telefone.valid && (!telefone.pristine || telefone.touched || form.submitted)}"
+                            id="telefone-profissional" mask="+99 (99) 99999-9999" name="telefone-profissional"
+                            placeholder="+xx (xx) xxxxx-xxxx" unmask="true"></p-inputMask>
+                    </span>
+                </div>
+            </div>
+            <div class="p-grid">
+                <div class="p-col-12 p-md-4 p-sm-12">
+                    <div class="box">
+                        <strong>Função: </strong>
+                        <span class="material-icons info-icon" pTooltip="Digite a Função"
+                            tooltipPosition="top">info</span>
+                        <label>
+                            <span class="color-red">*</span>
+                        </label>
+                    </div>
+                    <span class="md-inputfield">
+                        <input #funcao="ngModel" [(ngModel)]="profissional.funcao" 
+                            [ngClass]="{'ng-dirty ng-invalid ng-touched': !funcao.valid && (!funcao.pristine || funcao.touched || form.submitted)}"
+                            id="funcao-profissional" maxlength="80" name="funcao-profissional" pInputText
+                            placeholder="Insira um texto" required type="text" />
+                        <div *ngIf="!funcao.valid && (!funcao.pristine || funcao.touched || form.submitted)"
+                        class="ui-message ui-messages-error">O campo 'Função' é de preenchimento obrigatório</div>
+                    </span>
+                </div>
+            </div>
+
+            <div class="botoes">
+                <div>
+                    <button (click)="cancelar()" 
+                        class="ui-button-rounded-50 ui-button-secondary button-cancelar button-responsive"
+                        label="Cancelar" pButton type="button"></button>
+                </div>
+                <div>
+                    <button label="Salvar"
+                        class="ui-button-rounded-50 ui-button-success button-success button-responsive p-ml-2" pButton
+                        type="submit"></button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
