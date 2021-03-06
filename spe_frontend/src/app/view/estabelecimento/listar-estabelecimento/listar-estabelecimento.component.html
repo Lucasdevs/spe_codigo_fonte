@@ -35,7 +35,7 @@
 
             <div class="botaoIncluir">
                 <div class="box">
-                    <app-card-adicionar label="Incluir Novo" (click)="cadastrar()"></app-card-adicionar>
+                    <app-card-adicionar label="Novo Estabelecimento" (click)="cadastrar()"></app-card-adicionar>
                 </div>
             </div>
 
@@ -72,10 +72,14 @@
                                 </td>
                                 <td class="text-align-center">
                                     <span class="cursor-pointer margin-right-10p p-mr-1">
-                                        <i (click)="editar(item.id)" class="pi pi-pencil"></i>
+                                        <button pButton (click)="editar(item.id)" type="button" class="p-button-raised p-button-rounded">
+                                            <i class="pi pi-pencil p-mt-2"></i>
+                                        </button>
                                     </span>
                                     <span class="cursor-pointer">
-                                        <i (click)="excluir(item.id)" class="pi pi-trash"></i>
+                                        <button pButton type="button" (click)="excluir(item.id)" class="p-button-raised p-button-rounded">
+                                            <i class="pi pi-trash p-mt-2"></i>
+                                        </button>
                                     </span>
                                 </td>
                             </tr>
