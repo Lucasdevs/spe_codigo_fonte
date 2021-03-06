@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="20200228145500-1" author="isaque.costa">
+        <createTable tableName="TB_ESTABELECIMENTO" >
+
+            <column name="PK_ESTABELECIMENTO" type="BIGINT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="NO_ESTABELECIMENTO" type="VARCHAR2(80)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="NU_TELEFONE" type="VARCHAR2(15)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="NU_ENDERECO" type="VARCHAR2(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FK_PROFISSIONAL" type="BIGINT">
+                <constraints foreignKeyName="FK_PROFISSIONAL" referencedTableName="TB_PROFISSIONAL"
+                             referencedColumnNames="PK_PROFISSIONAL"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20200228145500-3" author="isaque.costa">
+        <createSequence sequenceName="SQ_ESTABELECIMENTO" incrementBy="1" startValue="1"/>
+    </changeSet>
+
+</databaseChangeLog>
