@@ -19,8 +19,7 @@
 • É o serviço responsável por gerenciar profissionais, estabelecimentos e seus vínculos.
 
 
-# Ambiente de desenvolvimento 
-Compose dos containers
+# Ambiente de desenvolvimento (Compose dos containers)
 • Navegue até a pasta /docker e execute: [ docker-compose -f docker-compose-dev.yml up -d ] Os containers serão construídos e estarão prontos.
 
 
