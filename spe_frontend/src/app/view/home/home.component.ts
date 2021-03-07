@@ -54,9 +54,6 @@ export class HomeComponent implements OnInit {
   }
 
   show(){
-    console.log(this.numEstabelecimentos);
-    console.log(this.numProfissionais);
-    
     this.data = {
       labels: ['Estabelecimentos','Profissionais'],
       datasets: [

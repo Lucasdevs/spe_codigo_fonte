@@ -150,8 +150,6 @@ export class ListarProfissionalComponent extends BaseController implements OnIni
 
 
   salvarAdd() {
-    console.log(this.estabelecimentosVaziaSelect.length);
-
     this.fecharModal();
 
     this.estabelecimentosVaziaSelect.forEach(n => {
