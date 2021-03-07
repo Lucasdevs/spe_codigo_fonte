@@ -4,7 +4,7 @@ import { LoginSuccessComponent } from '@nuvem/angular-base';
 import { EstabelecimentoModule } from './view/estabelecimento/estabelecimento.module';
 import { ProfissionalModule } from './view/profissional/profissional.module';
 const routes: Routes = [
-    { path: 'login-success', component: LoginSuccessComponent },
+    { path: 'login-sucess', component: LoginSuccessComponent },
     {
       path: 'estabelecimento',
       loadChildren: () => EstabelecimentoModule

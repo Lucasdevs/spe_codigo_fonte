@@ -17,6 +17,7 @@ import { CardAdicionarModule } from './components/card-adicionar/card-adicionar.
 import {MultiSelectModule} from 'primeng/multiselect';
 import { EstabelecimentoModule } from './view/estabelecimento/estabelecimento.module';
 import { ProfissionalModule } from './view/profissional/profissional.module';
+import { HomeModule } from './view/home/home.module';
 
 
 @NgModule({
@@ -24,7 +25,7 @@ import { ProfissionalModule } from './view/profissional/profissional.module';
         AppComponent,
         AppTopbarComponent,
         AppFooterComponent,   
-        MecMenuComponent
+        MecMenuComponent, 
     ],
     imports: [
         MultiSelectModule,
@@ -45,6 +46,7 @@ import { ProfissionalModule } from './view/profissional/profissional.module';
         CardAdicionarModule,
         EstabelecimentoModule,
         ProfissionalModule,
+        HomeModule,
         SharedModule
     ],
     providers: [
