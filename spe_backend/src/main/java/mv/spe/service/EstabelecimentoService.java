@@ -3,6 +3,7 @@ package mv.spe.service;
 import com.github.dockerjava.api.exception.BadRequestException;
 import lombok.RequiredArgsConstructor;
 import mv.spe.domain.Estabelecimento;
+import mv.spe.domain.Profissional;
 import mv.spe.repository.EstabelecimentoRepository;
 import mv.spe.service.dto.EstabelecimentoDTO;
 import mv.spe.service.dto.EstabelecimentoListDTO;
@@ -15,7 +16,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Objects;
 
 
@@ -50,11 +50,6 @@ public class EstabelecimentoService {
         return salvar(dto);
     }
 
-    @Transactional(readOnly = true)
-    public List<Estabelecimento> obterPorIds(List<Long> id) {
-        return this.repository.findAllById(id);
-    }
-
     private EstabelecimentoDTO salvar(EstabelecimentoDTO dto) {
 
         this.repository.save(this.mapper.toEntity(dto));
@@ -62,25 +57,23 @@ public class EstabelecimentoService {
         return dto;
     }
 
-    @Transactional(readOnly = true)
-    public Estabelecimento consultarPorId(Long id) {
+
+    private Estabelecimento consultarPorId(Long id) {
         return this.repository
                 .findById(id)
                 .orElseThrow(() ->
                         new BadRequestException(ConstantsUtil.ID_NOT_FOUND));
     }
 
+    @Transactional(readOnly = true)
     public EstabelecimentoDTO obterPorId(Long id) {
-        Estabelecimento estabelecimento = this.consultarPorId(id);
-        return this.mapper.toDto(estabelecimento);
+        return this.mapper.toDto(this.consultarPorId(id));
     }
 
 
     public void excluir(Long id) {
-        if (!this.repository.existsById(id)) {
-            throw new BadRequestException(ConstantsUtil.ID_NOT_FOUND);
-        }
-        this.repository.deleteById(id);
+        Estabelecimento entidade = this.consultarPorId(id);
+        this.repository.delete(entidade);
     }
 
 
