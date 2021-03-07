@@ -96,7 +96,7 @@
                     <span class="md-inputfield">
                         <input #funcao="ngModel" [(ngModel)]="profissional.funcao" 
                             [ngClass]="{'ng-dirty ng-invalid ng-touched': !funcao.valid && (!funcao.pristine || funcao.touched || form.submitted)}"
-                            id="funcao-profissional" maxlength="80" name="funcao-profissional" pInputText
+                            id="funcao-profissional" maxlength="50" name="funcao-profissional" pInputText
                             placeholder="Insira um texto" required type="text" />
                         <div *ngIf="!funcao.valid && (!funcao.pristine || funcao.touched || form.submitted)"
                         class="ui-message ui-messages-error">O campo 'Função' é de preenchimento obrigatório</div>
