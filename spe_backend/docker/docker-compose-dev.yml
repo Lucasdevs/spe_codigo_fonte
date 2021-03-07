@@ -1,0 +1,7 @@
+version: '2'
+services:
+  spe-postgresql:
+    extends:
+      file: postgresql.yml
+      service: spe-postgresql
+    container_name: spe-postgresql

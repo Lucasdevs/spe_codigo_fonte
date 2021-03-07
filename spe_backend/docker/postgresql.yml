@@ -1,0 +1,11 @@
+version: '2'
+services:
+  spe-postgresql:
+    image: postgres:11.5
+    # volumes:
+    #     - ~/volumes/jhipster/speservice/postgresql/:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=spe
+      - POSTGRES_PASSWORD=spe
+    ports:
+      - 5432:5432

@@ -1,0 +1,174 @@
+<h2 class="titulo">
+    Profissionais
+</h2>
+<div class="card p-shadow-10">
+    <div class="p-fluid">
+        <p-toast key="tl" position="top-left"></p-toast>
+
+        <form #form="ngForm" (ngSubmit)="listar()">
+
+            <div class="p-grid p-jc-between">
+                <div class="p-col-10 p-md-6 p-sm-10">
+                    <div class="box">
+                        <strong>Nome: </strong>
+                        <span class="material-icons info-icon" pTooltip="Insira o Nome"
+                            tooltipPosition="top">info</span>
+                    </div>
+                    <span class="md-inputfield p-text-center">
+                        <input id="nome--profissional" name="nome--profissional" [(ngModel)]="profissional.nome"
+                             class="width-100p" placeholder="Insira o Texto">
+                    </span>
+                </div>
+            </div>
+
+            <div class="p-grid p-jc-between">
+                <div class="p-col-10 p-md-6 p-sm-10">
+                    <div class="box">
+                        <strong>Função: </strong>
+                        <span class="material-icons info-icon" pTooltip="Insira a Função"
+                            tooltipPosition="top">info</span>
+                    </div>
+                    <span class="md-inputfield p-text-center">
+                        <input id="funcao--profissional" name="funcao--profissional" [(ngModel)]="profissional.funcao"
+                             class="width-100p" placeholder="Insira o Texto">
+                    </span>
+                </div>
+            </div>
+
+            <div class="botoesPesquisa">
+                <div class="p-mr-2">
+                    <button class="ui-button-rounded-50 ui-button-success button-success button-responsive"
+                        label="Pesquisar" pButton type="submit" (click)="liberaCarregamento()"></button>
+                </div>
+                <div>
+                    <button (click)="limpar()"
+                        class="ui-button-rounded-50 ui-button-secondary button-cancelar button-responsive"
+                        label="Limpar" pButton type="button" (click)="liberaCarregamento()"></button>
+                </div>
+            </div>
+
+            <div class="botaoIncluir">
+                <div class="box">
+                    <app-card-adicionar label="Novo Profissional" (click)="cadastrar()"></app-card-adicionar>
+                </div>
+            </div>
+
+            <div class="p-grid">
+                <div class="p-col-12 p-sm-12">
+                    <p-table #tabela (onLazyLoad)="listar()" (onPage)="liberaCarregamento()"
+                        [currentPageReportTemplate]="'Página {currentPage} de {totalPages}'" [lazy]="true"
+                        [pageLinks]="3" [paginator]="true" [autoLayout]="true" [resizableColumns]="true"
+                        [rowsPerPageOptions]="[10,25,50]" [rows]="10" [showCurrentPageReport]="true" [sortOrder]="1"
+                        [totalRecords]="profissionais.totalElements" [value]="profissionais.content">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th *ngFor="let col of colunas" [pSortableColumn]="col.field"
+                                (click)="liberaCarregamento()">
+                                    {{col.header}}
+                                    <p-sortIcon [field]="col.field" ariaLabel="Ative para ordenar"
+                                        ariaLabelAsc="Ative para listar em ordem crescente"
+                                        ariaLabelDesc="Ative para listar em ordem decrescente"></p-sortIcon>
+                                </th>
+                                <th></th>
+                            </tr>
+                        </ng-template>
+
+                        <ng-template let-item pTemplate="body">
+                            <tr>
+                                <td class="text-align-center">
+                                    {{item.nome}}
+                                </td>
+                                <td class="text-align-center">
+                                    {{item.endereco}}
+                                </td>
+                                <td class="text-align-center">
+                                    {{item.celular}}
+                                </td>
+                                <td class="text-align-center">
+                                    {{item.telefone}}
+                                </td>
+                                <td class="text-align-center">
+                                    {{item.funcao}}
+                                </td>
+                                <td class="text-align-center">
+                                    <span class="cursor-pointer margin-right-10p p-mr-1">
+                                        <button (click)="abrirModal(item.id)" pButton type="button" class="p-button-raised p-button-rounded">
+                                            <i class="pi pi-plus p-mt-1"></i>
+                                        </button>
+                                    </span>
+                                    <span class="cursor-pointer margin-right-10p p-mr-1">
+                                        <button (click)="editar(item.id)" pButton type="button" class="p-button-raised p-button-rounded">
+                                            <i class="pi pi-pencil p-mt-2"></i>
+                                        </button>
+                                    </span>
+                                    <span class="cursor-pointer">
+                                        <button (click)="excluir(item.id)" pButton type="button" class="p-button-raised p-button-rounded">
+                                            <i class="pi pi-trash p-mt-2"></i>
+                                        </button>
+                                    </span>
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template let-columns pTemplate="emptymessage">
+                            <tr>
+                                <td [attr.colspan]="6">
+                                    Nenhum registro encontrado
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<p-dialog [(visible)]="exibeDialog" [closable]="exibeDialog" [draggable]="false" [header]="'Adicionar Estabelecimentos'"
+          [modal]="true" [responsive]="true" [style]="{width: '800px'}" [resizable]="false">
+
+        <form #form="ngForm" (ngSubmit)="salvarAdd()" >
+            <div class="dialog-body p-fluid">
+                <div class="p-col">
+                    <div class="box"> 
+                        <strong>Profissional: </strong>
+                        <h2>{{profissional.nome}}</h2>
+                    </div>
+                </div>
+                <div class="p-col">
+                    <div class="box"> 
+                    <strong>Estabelecimentos: </strong>
+                    <span class="material-icons info-icon" pTooltip="Selecione o Estabelecimento" 
+                        tooltipPosition="top">info</span>
+                    </div>
+                    <div class="p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12">
+                        <p-pickList sourceHeader="Não possui" 
+                                            targetHeader="Possui"
+                                            [responsive]="true" 
+                                            [dragdrop]="true" 
+                                            [source]="estabelecimentosSelect"
+                                            [target]="estabelecimentosVaziaSelect" 
+                                            [showSourceControls]="false"
+                                            [showTargetControls]="false">
+
+                                    <ng-template let-item pTemplate="item">
+                                        <div class="ui-helper-clearfix">
+                                            <div>{{item.label}}</div>
+                                        </div>
+                                    </ng-template>
+
+                        </p-pickList>
+                    </div>
+                </div> 
+            </div>
+            <div class="botoes">
+                <div>
+                    <button label="Salvar"
+                        class="ui-button-rounded-50 ui-button-success button-success button-responsive p-ml-2" pButton
+                        type="submit"></button>
+                </div>
+            </div>
+        </form>
+</p-dialog>
+<p-confirmDialog header="Excluir" [draggable]="false" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+
+
