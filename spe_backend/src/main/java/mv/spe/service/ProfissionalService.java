@@ -2,7 +2,6 @@ package mv.spe.service;
 
 import com.github.dockerjava.api.exception.BadRequestException;
 import lombok.RequiredArgsConstructor;
-import mv.spe.domain.Estabelecimento;
 import mv.spe.domain.Profissional;
 import mv.spe.repository.ProfissionalRepository;
 import mv.spe.service.dto.ProfissionalDTO;
@@ -15,9 +14,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.CollectionUtils;
 
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Objects;
 
 @Service
@@ -27,8 +25,6 @@ public class ProfissionalService {
 
 
     private final ProfissionalMapper mapper;
-
-    private final EstabelecimentoService estabelecimentoService;
 
     private final ProfissionalRepository repository;
 
@@ -55,44 +51,34 @@ public class ProfissionalService {
     }
 
     private ProfissionalDTO salvar(ProfissionalDTO dto) {
-
-        this.repository.save(this.mapper.toEntity(dto));
-
-        return dto;
+        Profissional entidade = this.mapper.toEntity(dto);
+        if (!Objects.nonNull(entidade.getEstabelecimentos())) {
+            entidade.setEstabelecimentos(new ArrayList<>());
+        }
+        return this.mapper.toDto(this.repository.save(entidade));
     }
 
-    @Transactional(readOnly = true)
-    public Profissional consultarPorId(Long id) {
+    private Profissional consultarPorId(Long id) {
         return this.repository
                 .findById(id)
                 .orElseThrow(() ->
                         new BadRequestException(ConstantsUtil.ID_NOT_FOUND));
     }
-
+    @Transactional(readOnly = true)
     public ProfissionalDTO obterPorId(Long id) {
-        Profissional profissional = this.consultarPorId(id);
-        return this.mapper.toDto(profissional);
+        return this.mapper.toDto(this.consultarPorId(id));
     }
 
 
     public void excluir(Long id) {
+        Profissional entidade = this.consultarPorId(id);
 
-        if (!this.repository.existsById(id)) {
-        }
-
-        ProfissionalDTO dto = this.mapper.toDto(this.repository.getOne(id));
-
-
-        List<Estabelecimento> estabelecimentos =  (!CollectionUtils.isEmpty(dto.getIdEstabelecimentos()))
-                ? this.estabelecimentoService.obterPorIds(dto.getIdEstabelecimentos())
-                : null;
-
-        if(Objects.nonNull(estabelecimentos)) {
-            estabelecimentos.forEach(estabelecimento -> {
+        if(!entidade.getEstabelecimentos().isEmpty()) {
+            entidade.getEstabelecimentos().forEach(estabelecimento -> {
                 this.repository.removerVinculoEstabelecimento(estabelecimento.getId());
             });
         }
-        this.repository.deleteById(id);
+        this.repository.delete(entidade);
     }
 
 }
